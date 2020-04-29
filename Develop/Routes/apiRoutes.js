@@ -1,6 +1,9 @@
 const fs = require('fs');
 const util = require('util');
 const router = require('express').Router();
+const db = require ("../db/db.json")
+
+console.log (db)
 
 router.get('/notes', (req, res) =>{
     // let createdNote = req.params.notes;
@@ -14,8 +17,7 @@ router.get('/notes', (req, res) =>{
 }) 
 
 router.post('/notes', (req, res) =>{
-    let newNote = req.body; 
-
+    let newNote = req.body;   
     console.log (newNote);
 
     res.json(newNote)
@@ -24,7 +26,7 @@ router.post('/notes', (req, res) =>{
         if(err) throw (err);
         console.log("note saved")
 
-    } )   
+    })   
 })
 
 router.delete('/notes/:id', (req, res) =>{
