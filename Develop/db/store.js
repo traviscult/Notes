@@ -1,23 +1,19 @@
 const fs = require('fs');
+const util = require('util');
 
+const readFileAsync = util.promisify(fs.readFile);
+const writeFileAsync = util.promisify(fs.writeFile);
 
 class Store {
     constructor(){
 
     }
     read(){
-        fs.readFile("./db.json", "utf8", function (err, res) {
-            // res.write(data);
-            console.log("res", res)
-            return res;
-        })
+        return readFileAsync("db/db.json", "utf8")
     }
 
     write(newNote){
-        fs.writeFile("db/db.json", JSON.stringify(newNote), (err) => {
-            if(err) throw (err);
-            console.log("note saved")
-        })   
+        return writeFileAsync("db/db.json", JSON.stringify(newNote))   
     }
 
     getNotes(){
@@ -28,11 +24,12 @@ class Store {
         
     }
 
-    addNotes(){
-       let notesArray = this.getNotes();
+    async addNotes(newNote){
+       let notesArray = await this.getNotes();
        console.log(notesArray);
-
-
+        notesArray.push(newNote);
+        console.log("notesArray", notesArray)
+        this.write(notesArray);
     }
     // grab the notes add the new one then write to db json
     // take a note in param

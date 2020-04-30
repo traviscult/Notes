@@ -6,12 +6,10 @@ const db = require ("../db/db.json")
 
 console.log (db)
 
-
+// add uuid to object before you write 
 
 router.get('/notes', (req, res) =>{
-    // let createdNote = req.params.notes;
-    // console.log(createdNote);
-    // res.json(createdNote)
+//  use store (res.json) add notes to side bar
 
  
 }) 
