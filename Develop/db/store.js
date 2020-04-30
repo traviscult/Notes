@@ -30,6 +30,7 @@ class Store {
         .then(notes => [...notes, addID])
         .then(updatedNotes => this.write(updatedNotes))
         .then(() => addID)
+
     }
 
     removeNote(id) {
